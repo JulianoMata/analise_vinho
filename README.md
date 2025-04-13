@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1e90ce660756c9501276c5fcc309302d66754407
 # 🍷 Análise de Dados – Classificação de Vinhos com Machine Learning
 
 Este projeto foi desenvolvido como parte do **Projeto Integrador** do curso de Ciência de Dados e Inteligência Artificial da **Faculdade UniDomBosco**. O objetivo é realizar uma análise exploratória e aplicar técnicas de machine learning para classificar diferentes tipos de vinho tinto com base em suas características físico-químicas.
@@ -48,6 +51,7 @@ O dataset utilizado é **público** e está disponível no repositório. Ele con
  ┣ 📄 analise_vinho.py
  ┣ 📄 winequality-red.csv
  ┣ 📄 README.md
+<<<<<<< HEAD
 ```
 
 ---
@@ -81,3 +85,5 @@ model.fit(X_train, y_train)
 ## ⚠️ Observações
 
 Este projeto é de caráter **educacional** e tem como finalidade a aplicação prática dos conhecimentos adquiridos ao longo da graduação.
+=======
+>>>>>>> 1e90ce660756c9501276c5fcc309302d66754407
