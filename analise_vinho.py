@@ -1,3 +1,8 @@
+# Faculdade UniDombosco - Projeto Integrador em Ciências de Dados e Inteligência Artificial V A
+# Aluno: Juliano França da Mata
+# Professora: Priscila Louise Leyser Santin
+# Data: 13/04/2025
+
 # Importação das bibliotecas necessárias para análise de dados e visualização
 import os  # Manipulação de caminhos e comandos do sistema
 
@@ -48,7 +53,7 @@ if total_nulos.sum() == 0:
 
 # 6. Visualizar a distribuição da variável alvo 'quality' (qualidade dos vinhos)
 plt.figure(figsize=(8, 5))
-sns.countplot(x='quality', data=df, palette='viridis')
+sns.countplot(x='quality', data=df, hue='quality', palette='viridis', legend=False)
 plt.title("Distribuição da Qualidade do Vinho")
 plt.xlabel("Qualidade")
 plt.ylabel("Contagem")
@@ -76,7 +81,7 @@ plt.show()
 
 # 10. Relação entre teor alcoólico e qualidade do vinho
 plt.figure(figsize=(10, 6))
-sns.boxplot(x='quality', y='alcohol', data=df, palette='magma')
+sns.boxplot(x='quality', y='alcohol', data=df, hue='quality', palette='magma', legend=False)
 plt.title("Relação entre Teor Alcoólico e Qualidade")
 plt.xlabel("Qualidade")
 plt.ylabel("Teor Alcoólico")
@@ -95,7 +100,7 @@ df['qualidade_cat'] = df['quality'].apply(categorizar_qualidade)
 
 # Visualizar nova distribuição após o agrupamento
 plt.figure(figsize=(8, 5))
-sns.countplot(x='qualidade_cat', data=df, palette='plasma')
+sns.countplot(x='qualidade_cat', data=df, hue='qualidade_cat', palette='plasma', legend=False)
 plt.title("Distribuição Agrupada da Qualidade do Vinho")
 plt.xlabel("Categorias de Qualidade (0=Baixa, 1=Média, 2=Alta)")
 plt.ylabel("Contagem")
@@ -121,7 +126,30 @@ y_pred = modelo.predict(X_test)
 print("\nMatriz de Confusão:")
 print(confusion_matrix(y_test, y_pred))
 print("\nRelatório de Classificação:")
-print(classification_report(y_test, y_pred))
+print(classification_report(y_test, y_pred, zero_division=0)) 
+
+# Isso significa:
+# - Dos 11 vinhos realmente da Classe 0, todos foram classificados erroneamente como Classe 1.
+# - Dos 262 vinhos da Classe 1, 250 foram corretamente classificados e 12 foram confundidos com Classe 2.
+# - Dos 47 vinhos da Classe 2, 26 foram corretamente classificados, mas 21 foram confundidos com Classe 1.
+
+"""Embora a Classe 0 não tenha sido corretamente classificada pelo modelo, esse comportamento é aceitável dentro do escopo educacional do projeto. Futuramente, técnicas de balanceamento de dados ou ajuste de hiperparâmetros poderiam ser exploradas para melhorar a performance."""
+
+# Relatório de Classificação:
+# Mostra o desempenho do modelo em cada classe (0 = Ruim, 1 = Regular, 2 = Boa)
+# Métricas:
+# - precision: acertos entre os que foram previstos como aquela classe
+# - recall: acertos entre os que realmente pertencem àquela classe
+# - f1-score: equilíbrio entre precision e recall
+# - support: total real de exemplos daquela classe
+
+# Observações:
+# - O modelo teve ótimo desempenho na classe "Regular" (classe 1)
+# - Teve dificuldades nas classes "Ruim" (0) e "Boa" (2), possivelmente por poucos exemplos (desequilíbrio de classes)
+# - A acurácia geral foi de 86%, o que é um bom resultado para um projeto educacional
+# - A média ponderada das métricas também indica desempenho consistente no geral
+
+""" Por ser um exercício inicial, não faremos ajustes finos no modelo neste momento"""
 
 # Conclusão:
 # A análise inicial forneceu uma visão geral do conjunto de dados, incluindo a estrutura e estatísticas básicas.
@@ -133,8 +161,4 @@ print(classification_report(y_test, y_pred))
 # Também foi aplicado um modelo de Random Forest para prever a qualidade do vinho com base nas variáveis do dataset.
 # Neste caso, a qualidade foi agrupada em três categorias (baixa, média e alta) para facilitar a predição.
 # As métricas de avaliação ajudam a entender a performance e precisão do modelo com essa nova abordagem.
-# 
-# Próximas etapas recomendadas:
-# - Otimização de hiperparâmetros do modelo (com GridSearchCV, por exemplo)
-# - Teste com outros algoritmos como SVM, KNN, ou redes neurais
-# - Análise de importância das variáveis para compreender quais características mais influenciam na qualidade
+# O modelo pode ser melhorado com ajustes de hiperparâmetros e validação cruzada. 
